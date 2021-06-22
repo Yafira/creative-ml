@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+    <h1 id="header-one">this is a header</h1>
+    <p id="para-one">hey this is a paragraph</p>
+
+    <button id="my-button" onclick="setVisibility()">hi I'm a button</button>
+    <script language="javascript" type="text/javascript">
+
+        let paragraph1 = document.getElementById("para-one");
+
+        // paragraph1.style.visibility = "hidden"
+        // paragraph1.style.visibility = "visible"
+        paragraph1.style.color = "green"
+
+        function setVisibility() {
+            paragraph1.style.visibility = "hidden"
+        }
+
+        // setVisibility();
+
+    </script>
+</body>
+</html>
