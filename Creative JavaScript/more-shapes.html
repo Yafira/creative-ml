@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+
+<canvas id="my-canvas" width="500" height="300"></canvas>
+
+
+    <script language="javascript" type="text/javascript">
+
+        let canvas = document.getElementById("my-canvas");
+        let context = canvas.getContext("2d");
+
+        function draw() {
+            context.clearRect(0, 0, 300, 300);
+            context.strokeStyle = "#000000";
+            context.fillStyle = "#0000FF";
+
+            context.beginPath();
+            context.arc(100, 100, 50, 0, Math.PI * 2, true);
+            context.stroke();
+
+            context.fill();
+            context.closePath();
+
+            context.strokeStyle = "#000000";
+            context.fillStyle = "#00FF00";
+            context.beginPath();
+            context.arc(300, 100, 50, 0, Math.PI * 2, true);
+            context.stroke();
+
+            context.fill();
+            context.closePath();
+
+
+
+            requestAnimationFrame(draw);
+
+        }
+
+        requestAnimationFrame(draw);
+
+
+
+    </script>
+</body>
+</html>
