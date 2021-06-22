@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+
+<canvas id="my-canvas" width="200" height="200"></canvas>
+
+
+    <script language="javascript" type="text/javascript">
+
+        let canvas = document.getElementById("my-canvas");
+        let context = canvas.getContext("2d");
+        let counter = 0;
+
+        function draw() {
+            context.clearRect(0, 0, 200, 200);
+
+            counter++;
+            context.beginPath();
+
+            context.moveTo(0, 0);
+            context.lineTo(100, 200);
+            context.strokeStyle = "#39FF14";
+            context.lineWidth = 20
+            context.stroke();
+
+            context.endPath();
+
+            if(counter > 50) {
+                counter = 0;
+            }
+
+            requestAnimationFrame(draw);
+
+        }
+
+        requestAnimationFrame(draw);
+
+
+
+    </script>
+</body>
+</html>
