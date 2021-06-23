@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<style>
+    body {
+        overflow: hidden;
+    }
+</style>
+<body>
+
+<canvas>
+</canvas>
+
+<script type="text/javascript">
+
+    let imageObj = new Image();
+    let background = new Image();
+
+
+    // load images
+    imageObj.src = "img/sprite.png";
+    background.src = "img/moon.jpg";
+
+    // create a variable to animate the sprite with
+    let animate = 0;
+
+    // keyboard control
+    let x = 400;
+    let y = 300;
+    let direction = 0;
+    let up = false;
+    let down = false;
+    let right = false;
+    let left = false;
+
+    document.onkeydown = keyPressed;
+    document.onkeyup = keyReleased;
+
+    let canvas=document.querySelector("canvas");
+    context = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // keystrokes
+    // values of the keys : http://www.quirksmode.org/js/keys.html
+
+    function keyPressed(input) {
+        if (input.keyCode == 39) right = true;
+        else if (input.keyCode == 37) left = true;
+        else if (input.keyCode == 38) up = true;
+        else if (input.keyCode == 40) down = true;
+    }
+
+    function keyReleased(input) {
+        if (input.keyCode == 39) right = false;
+        else if (input.keyCode == 37) left = false;
+        else if (input.keyCode == 38) up = false;
+        else if (input.keyCode == 40) down = false;
+    }
+
+    function draw() {
+
+        context.drawImage(background,0,0,800,600);
+        context.drawImage(imageObj,animate,direction,149,180,x,y,149,180);
+        // the if statements test to see if a direction key has been pressed and
+        // change the x and y position accordingly
+
+        if (right && x < 650) {
+            x += 10;
+            direction = 0;
+            }
+        else if (left && x > 0) {
+            x -= 10;
+            direction = 190;
+            }
+        if (up && y > 0) y -= 10;
+        else if (down && y < 410) y += 10;
+
+            if (right || left || up || down) animate += 150;
+            if (animate >= 1500) animate = 0;
+
+    // at the end of this loop, this function is called again.
+    // it keeps asking for frames as soon as the previous loop finishes.
+    requestAnimationFrame(draw);
+
+}
+
+requestAnimationFrame(draw);
+
+</script>
+
+</body>
+</html>
+
+
