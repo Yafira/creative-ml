@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<!-- The Canvas tag allows us to set up a screen in the browser that we can draw to. -->
+<canvas id="myCanvas" width="1400" height="1000" style="border:20px solid #eabfff;">
+</canvas>
+
+<script type="text/javascript">
+
+    let imageObj = new Image();
+    imageObj.src = "src/ditto.jpg";
+    let canvas = document.getElementById("myCanvas");
+    context = canvas.getContext("2d");
+
+    imageObj.onload = function draw() {
+
+        context.clearRect(0,0,1400,1000);
+        context.drawImage(imageObj, 0, 0);
+
+    requestAnimationFrame(draw);
+    }
+
+    console.log(imageObj.width);
+    requestAnimationFrame(draw);
+</script>
+
+</body>
+</html>
+
+

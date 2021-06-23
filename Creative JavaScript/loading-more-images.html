@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="500" height="240" style="border:10px solid #39FF14;">
+</canvas>
+
+<script type="text/javascript">
+
+    let numImages = 51;
+    let images = new Array(numImages);
+
+    for (let i = 0; i < numImages; i++) {
+
+        images[i] = new Image();
+
+        images[i].src = "https://api.mimicproject.com/asset/e8b01937-d1de-9a71-df5d-9f55041a88c2/frame_"+i+"_delay-0.04s.gif";
+
+    }
+
+    let currentImage = 0;
+    let canvas = document.getElementById("myCanvas");
+    context = canvas.getContext("2d");
+
+    function draw() {
+
+        context.drawImage(images[currentImage], 0, 0, 500, 240);
+        currentImage++;
+
+        if (currentImage >= numImages) {
+            currentImage = 0;
+        }
+
+        requestAnimationFrame(draw);
+
+    }
+    requestAnimationFrame(draw);
+</script>
+
+</body>
+</html>
