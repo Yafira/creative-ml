@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+
+<canvas id="my-canvas"></canvas>
+
+
+    <script language="javascript" type="text/javascript">
+
+        let mouseX;
+        let mouseY;
+
+        let canvasWidth;
+        let canvasHeight;
+
+        let canvas = document.getElementById("my-canvas");
+
+        context = canvas.getContext("2d");
+        canvasWidth = window.innerWidth;
+        canvasHeight = window.innerHeight;
+
+        canvas.style.position = "fixed";
+
+        canvas.setAttribute("height", canvasHeight);
+
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+
+        canvas.style.top = 0;
+        canvas.style.left = 0;
+
+
+        canvas.addEventListener('mousemove', getMouse, false);
+
+        function getMouse(mousePosition) {
+            // if(mousePosition.layerX || mousePosition.layerX == 0) {
+                mouseX = mousePosition.layerX;
+                mouseY = mousePosition.layerY;
+            // } else if (mousePosition.offsetX || mousePosition.offsetX == 0) {
+            //   mouseX = mousePosition.offsetX;
+            //    mouseY = mousePosition.offsetY;
+            // }
+        }
+
+        function draw() {
+
+            context.fillStyle = "#000000";
+            context.fillRect(0, 0, canvasWidth, canvasHeight);
+            context.strokeStyle = "#00FF00";
+            context.fillStyle = "#FFA500"
+            context.beginPath();
+            context.arc(mouseX, mouseY, 50, 0, Math.PI*2, true);
+            context.closePath();
+            context.stroke();
+            context.fill();
+
+
+            requestAnimationFrame(draw);
+
+        }
+
+        requestAnimationFrame(draw);
+
+
+
+    </script>
+</body>
+</html>
