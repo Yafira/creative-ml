@@ -17,38 +17,43 @@
         let canvas = document.getElementById("my-canvas");
 
         context = canvas.getContext("2d");
-        canvasWidth = window.innerWidth;
-        canvasHeight = window.innerHeight;
 
-        canvas.style.position = "fixed";
+        window.onload = window.onresize = function setup() {
+            canvasWidth = window.innerWidth;
+            canvasHeight = window.innerHeight;
 
-        canvas.setAttribute("height", canvasHeight);
+            canvas.style.position = "fixed";
 
-        canvas.width = canvasWidth;
-        canvas.height = canvasHeight;
+            canvas.setAttribute("height", canvasHeight);
 
-        canvas.style.top = 0;
-        canvas.style.left = 0;
+            canvas.width = canvasWidth;
+            canvas.height = canvasHeight;
 
+            canvas.style.top = 0;
+            canvas.style.left = 0;
+
+        }
 
         canvas.addEventListener('mousemove', getMouse, false);
 
         function getMouse(mousePosition) {
-            // if(mousePosition.layerX || mousePosition.layerX == 0) {
+            if(mousePosition.layerX || mousePosition.layerX == 0) {
                 mouseX = mousePosition.layerX;
                 mouseY = mousePosition.layerY;
-            // } else if (mousePosition.offsetX || mousePosition.offsetX == 0) {
-            //   mouseX = mousePosition.offsetX;
-            //    mouseY = mousePosition.offsetY;
-            // }
+            } else if (mousePosition.offsetX || mousePosition.offsetX == 0) {
+                mouseX = mousePosition.offsetX;
+                mouseY = mousePosition.offsetY;
+            }
         }
 
         function draw() {
 
+            context.globalAlpha = "0.05";
             context.fillStyle = "#000000";
             context.fillRect(0, 0, canvasWidth, canvasHeight);
             context.strokeStyle = "#00FF00";
             context.fillStyle = "#FFA500"
+            context.globalAlpha = "1.0";
             context.beginPath();
             context.arc(mouseX, mouseY, 50, 0, Math.PI*2, true);
             context.closePath();
