@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="600" height="300" style="border:1px solid #c3c3c3;">
+</canvas>
+
+<script type="text/javascript">
+
+    let x = 150;
+    let y = 250;
+
+    let up = false;
+    let down = false;
+    let right = false;
+    let left = false;
+
+    document.onkeydown = keyPressed;
+    document.onkeyup = keyReleased;
+
+    let canvas  = document.getElementById("myCanvas");
+    context =    canvas.getContext("2d");
+
+    // these functions get the keystrokes.
+    // values of the keys : http://www.quirksmode.org/js/keys.html
+
+    function keyPressed(input) {
+        if (input.keyCode == 39) right = true;
+        else if (input.keyCode == 37) left = true;
+        else if (input.keyCode == 38) up = true;
+        else if (input.keyCode == 40) down = true;
+    }
+
+    function keyReleased(input) {
+        if (input.keyCode == 39) right = false;
+        else if (input.keyCode == 37) left = false;
+        else if (input.keyCode == 38) up = false;
+        else if (input.keyCode == 40) down = false;
+    }
+
+
+    function draw() {
+
+        context.clearRect(0,0,600,300);
+        context.beginPath();
+        context.fillStyle = "FF0000";
+        context.rect(x, y, 50, 50);
+        context.closePath();
+        context.fill();
+
+        // if statements test to see if a direction key has been pressed and
+        // change the x and y position accordingly
+
+        if (right && x < 550) x += 5;
+        else if (left && x > 0) x -= 5;
+        if (up && y > 0) y -= 5;
+        else if (down && y < 250) y += 5;
+
+        // at the end of this loop, this function is called again.
+        // it keeps asking for frames as soon as the previous loop finishes.
+    requestAnimationFrame(draw);
+    }
+
+    // call requestAnimationFrame(functionName) for the first time
+    // because it is being called at the end of the draw function, it will keep being called.
+    requestAnimationFrame(draw);
+</script>
+
+</body>
+</html>
