@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="300" height="300" style="border:1px solid #c3c3c3;">
+</canvas>
+
+<script type="text/javascript">
+
+    let x = 150;
+    let y = 150;
+    let dx = 2;
+    let dy = 4;
+    let context;
+
+    let c = document.getElementById("myCanvas");
+    context = c.getContext("2d");
+
+    function draw() {
+        context.clearRect(0,0,300,300);
+        context.beginPath();
+        context.arc(x, y, 10, 0, Math.PI*2, true);
+        context.closePath();
+        context.fill();
+
+        x += dx;
+        y += dy;
+
+        if (x + dx > 300 || x + dx < 0)
+            dx = -dx;
+        if (y + dy > 300 || y + dy < 0)
+            dy = -dy;
+
+        requestAnimationFrame(draw);
+}
+
+requestAnimationFrame(draw);
+
+</script>
+
+</body>
+</html>
