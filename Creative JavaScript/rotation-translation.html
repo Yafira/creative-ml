@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <canvas></canvas>
+
+    <script type="text/javascript">
+
+        let mouseX;
+        let mouseY;
+        let TWO_PI = Math.PI * 2;
+
+
+        let canvas = document.querySelector("canvas");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let context = canvas.getContext("2d");
+        canvas.addEventListener('mousemove', getMouse, false);
+
+        function getMouse(mousePosition) {
+
+            if (mousePosition.layerX || mousePosition.layerX === 0) {
+                mouseX = mousePosition.layerX;
+                mouseY = mousePosition.layerY;
+            } else if (mousePosition.offsetX || mousePosition.offsetX === 0) {
+                mouseX = mousePosition.offsetX;
+                mouseY = mousePosition.offsetY;
+
+            }
+        }
+
+// translate before rotating for rotation to occur in place.
+// and before drawing the loop.
+
+    context.translate(canvas.width / 4, canvas.height / 4);
+
+    let size = 500;
+    let rotate = 0.01;
+
+        function draw() {
+            // clear the screen
+            // ctx.clearRect(-150,-150,150,150);
+
+            // draw a square
+            context.beginPath();
+            context.fillStyle="#FFFFFF";
+
+            context.rect(0,0,Math.sin(size)*300,Math.cos(size)*100); 
+            context.fill();
+            context.stroke();
+            context.closePath();
+
+            // rotate around 0,0 by a factor that keeps changing.
+            context.rotate(rotate);
+            size += 0.01;
+
+        requestAnimationFrame(draw);
+
+    }
+
+    requestAnimationFrame(draw);
+
+    </script>
+</body>
+</html>
