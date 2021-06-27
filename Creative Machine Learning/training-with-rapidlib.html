@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <script src="http://doc.gold.ac.uk/eavi/rapidmix/RapidLib.js"></script>
+    <script language="javascript" type="text/javascript"></script>
+
+    <script>
+
+        var rapidLib = RapidLib();
+        // create a machine learning object for regression
+        var midiToFrequencyRegression = new rapidLib.Regression();
+
+
+        // create a Javascript object to hold training data
+
+            var data = [
+                {
+                    input:  [48],
+                    output: [130.81]
+                },
+                {
+                    input:  [54],
+                    output: [185.00]
+                },
+                {
+                    input:  [60],
+                    output: [261.63]
+                },
+                {
+                    input:  [66],
+                    output: [369.994]
+                },
+                {
+                    input:  [72],
+                    output: [523.25]
+                }
+            ];
+
+        // train a machine learning model with the data
+        midiToFrequencyRegression.train(data);
+
+        // create a new input to test the model
+        var newInput = [64];
+
+        // run the trained model on the new input
+        var freqHz = midiToFrequencyRegression.run(newInput);
+
+        console.log(freqHz); // outputs 333.713, the value of the frequency in Hz
+
+    </script>
+</body>
+</html>
