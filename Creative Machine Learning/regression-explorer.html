@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Simple RapidLib</title>
+</head>
+<body>
+    <canvas id = "canvas" height = 400 width = 400></canvas>
+    <div style = "position:absolute;left:420px;top:50px;width:200px">
+    <h2>Regression Explorer</h2>
+    <p>
+    Click to add examples and explore the regression line
+    changes based on your dataset
+    </p>
+</div>
+</body>
+<script src="https://www.doc.gold.ac.uk/eavi/rapidmix/RapidLib.js"></script>
+<script src = "regression-explorer.js" type = "text/javascript"></script>
+<script>
+
+    const updateHiddenNodes = (n)=> {
+    myRegression.setNumHiddenNodes(n)
+    explorer.retrain()
+    explorer.updateOutput()
+    }
+
+    //create an instance of the library
+    const rapidLib = window.RapidLib();
+    const myRegression = new rapidLib.Regression();
+
+    const demoTrainingSet = [
+        {
+            input: [0],
+            output: [0.5]
+        },
+        {
+            input: [1],
+            output: [0.5]
+        },
+        {
+            input: [0.5],
+            output: [0.5]
+        },
+    ];
+
+    myRegression.train(demoTrainingSet);
+    const explorer = new RegressionExplorer();
+
+    explorer.setup("canvas", myRegression);
+    explorer.recording = true;
+    explorer.updateOutput();
+
+    //updateHiddenNodes(2);
+
+</script>
+</html>
